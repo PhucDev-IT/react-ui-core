@@ -27,7 +27,7 @@ export type ChatMessage={
  id:string;
  senderId?:string;
  content?:React.ReactNode;
- timestamp:string;
+ timestamp?:string;
  status?:ChatMessageStatus;
  attachments?:ChatAttachment[];
  replyTo?:{name:string;content:string};
@@ -69,6 +69,7 @@ export function ChatConversationList({
 
 export function ChatMessageBubble({message,user,isMine}:{message:ChatMessage;user?:ChatUser;isMine:boolean}){
  if(message.system)return <div className="ui-chat-message ui-chat-message--system"><span>{message.content}</span></div>;
+ const hasMeta=Boolean(message.timestamp||message.edited||(isMine&&message.status));
  return <div className={cx('ui-chat-message',isMine&&'is-mine')}>
   {!isMine&&user?<Avatar src={user.avatar} name={user.name} size="sm"/>:null}
   <div className="ui-chat-message__main">
@@ -76,7 +77,7 @@ export function ChatMessageBubble({message,user,isMine}:{message:ChatMessage;use
    {message.replyTo&&<div className="ui-chat-message__reply"><strong>{message.replyTo.name}</strong><span>{message.replyTo.content}</span></div>}
    {message.attachments?.length?<div className="ui-chat-message__attachments">{message.attachments.map(a=>a.kind==='image'&&a.previewUrl?<a key={a.id} href={a.url||a.previewUrl} className="ui-chat-message__image" target="_blank" rel="noreferrer"><img src={a.previewUrl} alt={a.name}/></a>:<a key={a.id} className="ui-chat-message__file" href={a.url||'#'}><span className="ui-chat-message__file-icon">↗</span><span><strong>{a.name}</strong>{a.size&&<small>{a.size}</small>}</span></a>)}</div>:null}
    {message.content!==undefined&&message.content!==null&&message.content!==''?<div className="ui-chat-message__bubble">{message.content}</div>:null}
-   <div className="ui-chat-message__meta"><time>{message.timestamp}</time>{message.edited&&<span>Đã sửa</span>}{isMine&&message.status&&<ChatStatus status={message.status}/>}</div>
+   {hasMeta&&<div className="ui-chat-message__meta">{message.timestamp&&<time>{message.timestamp}</time>}{message.edited&&<span>Đã sửa</span>}{isMine&&message.status&&<ChatStatus status={message.status}/>}</div>}
   </div>
  </div>
 }
