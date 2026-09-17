@@ -49,3 +49,4 @@ export * from './components/RangeInput/RangeInput';
 export * from './components/TagsInput/TagsInput';
 export * from './components/RichTextEditor/RichTextEditor';
 export * from './components/ImageCheck/ImageCheck';
+export * from './components/Chat/Chat';
