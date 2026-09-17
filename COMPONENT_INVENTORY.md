@@ -9,17 +9,47 @@
 - runtime primary color
 - boxed / wide / fluid content width
 
-## Forms
-- Input / Textarea / Select
+## Forms & data entry
+- Input / Textarea / custom Select
 - Checkbox / Radio / Switch
 - InputGroup + InputAddon
-- PasswordInput
-- NumberInput
+- PasswordInput + PasswordStrength
+- NumberInput + NumberStepper
 - SearchInput
-- FileUpload / Dropzone
+- MultiSelect
+- Combobox / Autocomplete
+- AsyncSelect
+- CreatableSelect
+- Cascader
+- DatePicker / Inline DatePicker / DateRangePicker
+- TimePicker / DateTimePicker
+- MonthPicker / YearPicker / WeekPicker
+- DateRangePreset / DualCalendarRange
+- RangeInput / DualRangeSlider
+- TagsInput
+- ColorPicker
+- PinInput / OTP
+- Rating
+- CurrencyInput / PriceInput
+- PercentageInput
+- MaskedInput
+- Tiptap RichTextEditor
+- ImageCheck Radio / Checkbox
 - SelectableCard
 
-## Feedback
+## Upload & media
+- FileUpload / Dropzone
+- ImageUploader with preview
+- drag reorder
+- upload progress / retry / error state
+- ImageCropper
+- AvatarUploader
+- CoverSelector
+- MediaManager
+- LightboxGallery
+- SortableList
+
+## Feedback & overlay
 - Alert
 - ToastProvider + useToast
 - Modal / Drawer
@@ -27,27 +57,84 @@
 - LoadingOverlay
 - Progress / Spinner / Skeleton
 - Tooltip / EmptyState
+- Popover
+- Menu / nested menu
+- ContextMenu
+- Sheet / BottomSheet
+- HoverCard
+- NotificationCenter
+- CommandPalette
 
-## Navigation
+## Navigation & layout
 - Breadcrumb
 - Tabs
 - Accordion
 - Steps
 - SegmentedControl
+- TreeView
+- NestedNav
+- HorizontalNav
+- SplitPane
+- StickyActionFooter
+- FloatingActionBar
 - AppShell mobile drawer
 - AppShell collapsed sidebar
 
 ## Data
-- Table
-- Pagination
+- Table / Pagination
 - DataTable
-  - search
-  - sortable columns
-  - selectable rows
-  - bulk-selection state
-  - column visibility
-  - responsive scroll
-  - pagination
+- AdvancedDataTable
+  - search / column filters
+  - editable cells
+  - expandable detail row
+  - nested/tree rows
+  - sticky columns
+  - column resize / reorder
+  - server-side pagination hook
+  - saved views
+  - export action
+  - density selector
+  - fullscreen mode
+
+## Visualization
+- ChartFrame
+- Sparkline
+- KPITrend
+- ProgressRing
+- Gauge
+- MiniBarChart
+- FunnelChart
+- Heatmap
+
+## Ecommerce patterns
+- ProductVariantEditor
+- SKUMatrix
+- PriceInput
+- InventoryEditor
+- DiscountConditionBuilder
+- VoucherRuleBuilder
+- BannerUploader
+- ProductPicker
+- CollectionPicker
+- CustomerPicker
+- CategoryTreePicker
+- OrderStatusTimeline
+- PaymentStatus
+- FulfillmentStatus
+
+## Utilities
+- CopyButton / ClipboardField
+- Kbd
+- CodeBlock
+- ScrollArea
+- InfiniteScroll
+- VirtualList
+- Collapse
+- Truncate / ReadMore
+- RelativeTime
+- Countdown
+- QRCodeViewer
+- BarcodeViewer
 
 ## Admin patterns
 - FilterBar
@@ -64,28 +151,13 @@
 - ChatMessageBubble
 - ChatComposer
 - ChatTypingIndicator
-- message states: sending / sent / delivered / read / failed
+- sending / sent / delivered / read / failed
 - reply preview
 - file / image attachments
 - unread badge / online status
 - responsive mobile layout
-- standalone demo: `apps/demo/chat.html`
 
-## Future adapters (do not hand-roll)
-- date/time picker adapter if timezone-heavy requirements appear
-- production rich text editor adapter
-- image cropper
-- virtualized large table
-- sortable drag/drop
-- calendar
-
-## Added: Advanced Data Entry
-- Custom Select / Listbox (non-native dropdown visual)
-- DatePicker (popup single date)
-- Inline DatePicker
-- DateRangePicker
-- RangeInput
-- TagsInput
-- RichTextEditor / HTML description
-- ImageCheck Radio
-- ImageCheck Checkbox
+## Demo pages
+- `/` — core design-system overview
+- `/advanced.html` — advanced component & ecommerce showcase
+- `/chat.html` — full chat/messaging showcase
