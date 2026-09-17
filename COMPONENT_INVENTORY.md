@@ -56,9 +56,24 @@
 - PageHeader
 - StatCard
 
+## Chat & Messaging
+- ChatLayout
+- ChatConversationList
+- ChatThread
+- ChatMessageList
+- ChatMessageBubble
+- ChatComposer
+- ChatTypingIndicator
+- message states: sending / sent / delivered / read / failed
+- reply preview
+- file / image attachments
+- unread badge / online status
+- responsive mobile layout
+- standalone demo: `apps/demo/chat.html`
+
 ## Future adapters (do not hand-roll)
-- Date/time picker
-- rich text editor
+- date/time picker adapter if timezone-heavy requirements appear
+- production rich text editor adapter
 - image cropper
 - virtualized large table
 - sortable drag/drop
