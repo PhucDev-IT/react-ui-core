@@ -1,4 +1,4 @@
-import React,{useEffect,useMemo,useState} from 'react';
+import React,{useEffect,useMemo,useRef,useState} from 'react';
 import {Field} from '../Field/Field';
 import {cx} from '../../utils/cx';
 import './advanced-select.scss';
@@ -24,8 +24,8 @@ export function Combobox({label,hint,placeholder='Tìm và chọn...',options,va
 }
 
 export function AsyncSelect({loadOptions,...props}:Omit<React.ComponentProps<typeof Combobox>,'options'|'onSearch'>&{loadOptions:(query:string)=>Promise<Option[]>}){
- const[options,setOptions]=useState<Option[]>([]);const[loading,setLoading]=useState(false);let token=0;
- const search=async(q:string)=>{const id=++token;setLoading(true);try{const data=await loadOptions(q);if(id===token)setOptions(data)}finally{if(id===token)setLoading(false)}};
+ const[options,setOptions]=useState<Option[]>([]);const[loading,setLoading]=useState(false);const requestId=useRef(0);
+ const search=async(q:string)=>{const id=++requestId.current;setLoading(true);try{const data=await loadOptions(q);if(id===requestId.current)setOptions(data)}finally{if(id===requestId.current)setLoading(false)}};
  return <Combobox {...props} options={options} onSearch={search} hint={loading?'Đang tải...':props.hint}/>;
 }
 
