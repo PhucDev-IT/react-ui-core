@@ -46,13 +46,13 @@ export default function ChatDemo(){
   const attachments=files.map((file,index)=>({id:`local-${Date.now()}-${index}`,name:file.name,size:`${Math.max(1,Math.round(file.size/1024))} KB`,kind:'file' as const}));
   setMessages(prev=>({...prev,[activeId]:[...(prev[activeId]||[]),{id:String(Date.now()),senderId:'me',content:value,timestamp:new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'}),status:'sent',attachments}]}));
  };
- return <ThemeProvider value={{mode:'light',density:'comfortable',radius:'soft',fontSize:'normal',primary:'#206bc4',contentWidth:'fluid'}}>
-  <div style={{minHeight:'100vh',background:'var(--ui-bg)',padding:'24px'}}>
-   <div style={{maxWidth:1280,margin:'0 auto'}}>
-    <div style={{display:'flex',alignItems:'flex-end',justifyContent:'space-between',gap:16,marginBottom:18,flexWrap:'wrap'}}>
-     <div><div style={{fontSize:12,color:'var(--ui-primary)',fontWeight:700,textTransform:'uppercase',letterSpacing:'.08em'}}>Demo pattern</div><h1 style={{margin:'6px 0 4px',fontSize:30,color:'var(--ui-text)'}}>Chat & Messaging</h1><p style={{margin:0,color:'var(--ui-text-muted)'}}>Conversation list, bubble, reply, attachment, typing state, composer và responsive mobile.</p></div>
-     <Button variant="outline" onClick={()=>history.back()}>← Quay lại demo chính</Button>
-    </div>
+ return <ThemeProvider value={{density:'comfortable',radius:'soft',fontSize:'normal',primary:'#206bc4',contentWidth:'fluid'}}>
+  <div className="standalone-page">
+   <div className="standalone-page__inner">
+    <header className="standalone-page__header">
+     <div className="standalone-page__heading"><span className="standalone-page__eyebrow">R Core / Pattern</span><h1>Chat & Messaging</h1><p>Conversation list, bubble, reply, attachment, typing state, composer và responsive mobile.</p></div>
+     <div className="standalone-page__actions"><Button variant="outline" onClick={()=>location.href='/'}>← Demo chính</Button><Button variant="outline" onClick={()=>location.href='/advanced.html'}>Advanced Components</Button></div>
+    </header>
     <ChatLayout sidebar={<ChatConversationList conversations={conversations} activeId={activeId} onChange={setActiveId}/> }>
      <ChatThread
       title={activeConversation.title}
