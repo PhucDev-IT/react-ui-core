@@ -1,0 +1,2 @@
+import React from 'react';import './statcard.scss';
+export function StatCard({label,value,delta,trend='up',icon}:{label:React.ReactNode;value:React.ReactNode;delta?:React.ReactNode;trend?:'up'|'down'|'neutral';icon?:React.ReactNode}){return <div className="ui-stat"><div className="ui-stat__top"><span>{label}</span>{icon&&<i>{icon}</i>}</div><div className="ui-stat__value">{value}</div>{delta&&<div className={`ui-stat__delta is-${trend}`}>{delta}</div>}</div>}

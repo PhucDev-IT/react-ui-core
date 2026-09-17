@@ -1,0 +1,2 @@
+import React from 'react';import './field.scss';
+export function Field({label,hint,error,required,children}:{label?:React.ReactNode;hint?:React.ReactNode;error?:React.ReactNode;required?:boolean;children:React.ReactNode}){return <label className="ui-field">{label&&<span className="ui-field__label">{label}{required&&<span className="ui-field__required"> *</span>}</span>}{children}{error?<span className="ui-field__error">{error}</span>:hint&&<span className="ui-field__hint">{hint}</span>}</label>}

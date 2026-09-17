@@ -1,0 +1,5 @@
+import React, { useMemo, useState } from 'react';
+import { Field } from '../Field/Field';
+import './rangeinput.scss';
+export interface RangeInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>,'type'|'value'|'defaultValue'|'onChange'> {label?:React.ReactNode;hint?:React.ReactNode;value?:number;defaultValue?:number;onChange?:(value:number)=>void;showValue?:boolean;formatValue?:(value:number)=>React.ReactNode}
+export function RangeInput({label,hint,value,defaultValue=50,onChange,min=0,max=100,step=1,showValue=true,formatValue=(v)=>v,...props}:RangeInputProps){const controlled=value!==undefined;const[inner,setInner]=useState(Number(defaultValue));const val=Number(controlled?value:inner);const pct=useMemo(()=>((val-Number(min))/(Number(max)-Number(min)))*100,[val,min,max]);return <Field label={label} hint={hint}><div className="ui-range"><input {...props} type="range" min={min} max={max} step={step} value={val} style={{'--ui-range-pct':`${pct}%`} as React.CSSProperties} onChange={e=>{const n=Number(e.target.value);if(!controlled)setInner(n);onChange?.(n)}}/>{showValue&&<output>{formatValue(val)}</output>}</div></Field>}

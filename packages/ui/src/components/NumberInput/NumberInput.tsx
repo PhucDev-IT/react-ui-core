@@ -1,0 +1,5 @@
+import React from 'react';
+import { cx } from '../../utils/cx';
+import './numberinput.scss';
+export interface NumberInputProps{value?:number;defaultValue?:number;min?:number;max?:number;step?:number;label?:string;onChange?:(value:number)=>void;disabled?:boolean}
+export function NumberInput({value,defaultValue=0,min,max,step=1,label,onChange,disabled}:NumberInputProps){const[inner,setInner]=React.useState(defaultValue);const current=value??inner;const commit=(n:number)=>{const next=Math.min(max??Infinity,Math.max(min??-Infinity,n));if(value===undefined)setInner(next);onChange?.(next)};return <label className="ui-number-field">{label&&<span>{label}</span>}<div className="ui-number-input"><button type="button" disabled={disabled||current<=(min??-Infinity)} onClick={()=>commit(current-step)}>−</button><input value={current} disabled={disabled} inputMode="decimal" onChange={e=>commit(Number(e.target.value)||0)}/><button type="button" disabled={disabled||current>=(max??Infinity)} onClick={()=>commit(current+step)}>+</button></div></label>}

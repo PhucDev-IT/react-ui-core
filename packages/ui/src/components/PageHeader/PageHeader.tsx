@@ -1,0 +1,2 @@
+import React from 'react';import './pageheader.scss';
+export function PageHeader({eyebrow,title,description,actions}:{eyebrow?:React.ReactNode;title:React.ReactNode;description?:React.ReactNode;actions?:React.ReactNode}){return <div className="ui-page-header"><div>{eyebrow&&<div className="ui-page-header__eyebrow">{eyebrow}</div>}<h1>{title}</h1>{description&&<p>{description}</p>}</div>{actions&&<div className="ui-page-header__actions">{actions}</div>}</div>}

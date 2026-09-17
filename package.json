@@ -1,0 +1,11 @@
+{
+  "name": "react-ui-core",
+  "private": true,
+  "version": "0.0.1",
+  "packageManager": "pnpm@10.15.0",
+  "scripts": {
+    "dev": "pnpm --filter demo dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck"
+  }
+}

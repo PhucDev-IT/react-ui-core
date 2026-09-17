@@ -1,0 +1,2 @@
+import React from 'react';import {cx} from '../../utils/cx';import './alert.scss';
+export function Alert({tone='info',title,children,onClose}:{tone?:'info'|'success'|'warning'|'danger';title?:React.ReactNode;children:React.ReactNode;onClose?:()=>void}){return <div className={cx('ui-alert',`ui-alert--${tone}`)}><div><strong>{title}</strong><div>{children}</div></div>{onClose&&<button onClick={onClose} aria-label="Close">×</button>}</div>}

@@ -1,0 +1,2 @@
+import React from 'react';import {Button} from '../Button/Button';import './emptystate.scss';
+export function EmptyState({icon='□',title,description,actionLabel,onAction}:{icon?:React.ReactNode;title:React.ReactNode;description?:React.ReactNode;actionLabel?:string;onAction?:()=>void}){return <div className="ui-empty"><div className="ui-empty__icon">{icon}</div><h3>{title}</h3>{description&&<p>{description}</p>}{actionLabel&&<Button onClick={onAction}>{actionLabel}</Button>}</div>}

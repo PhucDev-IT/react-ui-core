@@ -1,0 +1,97 @@
+# =========================
+# Dependencies
+# =========================
+node_modules/
+**/node_modules/
+
+# pnpm
+.pnpm-store/
+.pnpm-debug.log*
+pnpm-debug.log*
+
+# npm
+npm-debug.log*
+.npm/
+
+# yarn
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# Build outputs
+# =========================
+dist/
+**/dist/
+
+build/
+**/build/
+
+out/
+**/out/
+
+coverage/
+**/coverage/
+
+# TypeScript build cache
+*.tsbuildinfo
+
+# Vite
+.vite/
+**/.vite/
+
+# =========================
+# Environment files
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+**/logs/
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json
+
+.idea/
+*.iml
+
+# =========================
+# OS generated files
+# =========================
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# =========================
+# Temporary files
+# =========================
+tmp/
+temp/
+*.tmp
+*.temp
+
+# =========================
+# Test / tooling caches
+# =========================
+.cache/
+**/.cache/
+
+.eslintcache
+
+# =========================
+# Misc
+# =========================
+*.local
+
+# Optional local archives
+*.zip
+*.tar
+*.tar.gz

@@ -1,0 +1,2 @@
+import React from 'react';import {cx} from '../../utils/cx';import './avatar.scss';
+export function Avatar({src,name,size='md',status}:{src?:string;name:string;size?:'sm'|'md'|'lg';status?:'online'|'offline'}){const initials=name.split(' ').slice(-2).map(x=>x[0]).join('').toUpperCase();return <span className={cx('ui-avatar',`ui-avatar--${size}`)}>{src?<img src={src} alt={name}/>:initials}{status&&<i className={cx('ui-avatar__status',`is-${status}`)}/>}</span>}

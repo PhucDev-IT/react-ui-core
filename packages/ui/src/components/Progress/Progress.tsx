@@ -1,0 +1,2 @@
+import React from 'react';import './progress.scss';
+export function Progress({value=0,label,showValue=false}:{value?:number;label?:React.ReactNode;showValue?:boolean}){const v=Math.max(0,Math.min(100,value));return <div className="ui-progress"><div className="ui-progress__meta">{label}<span>{showValue?`${v}%`:null}</span></div><div className="ui-progress__track"><div style={{width:`${v}%`}}/></div></div>}
