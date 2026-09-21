@@ -56,6 +56,10 @@
 - ConfirmModal
 - LoadingOverlay
 - Progress / Spinner / Skeleton
+- DotsLoader / PulseLoader / InlineLoader
+- SectionLoader / PageLoader / DelayedLoader
+- LoadingState / useDelayedLoading
+- SkeletonText / SkeletonAvatar / SkeletonCard / SkeletonList / SkeletonTable / SkeletonForm / SkeletonProductCard / SkeletonPage
 - Tooltip / EmptyState
 - Popover
 - Menu / nested menu
@@ -161,3 +165,4 @@
 - `/` — core design-system overview
 - `/advanced.html` — advanced component & ecommerce showcase
 - `/chat.html` — full chat/messaging showcase
+- `/loading.html` — loading, skeleton and async-state showcase
