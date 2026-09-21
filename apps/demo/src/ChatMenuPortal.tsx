@@ -31,6 +31,13 @@ export default function ChatMenuPortal(){
         <span>Advanced Components</span>
         <span className="demo-chat-menu-link__arrow">›</span>
       </a>
+      <a className="demo-chat-menu-link" href="/loading.html" title="Loading & Skeleton">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>
+        </svg>
+        <span>Loading & Skeleton</span>
+        <span className="demo-chat-menu-link__arrow">›</span>
+      </a>
       <a className="demo-chat-menu-link" href="/chat.html" title="Chat & Messaging">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
           <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"/>
