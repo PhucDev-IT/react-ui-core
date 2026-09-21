@@ -37,6 +37,7 @@ export * from './components/SelectableCard/SelectableCard';
 export * from './components/Toast/Toast';
 export * from './components/ConfirmModal/ConfirmModal';
 export * from './components/LoadingOverlay/LoadingOverlay';
+export * from './components/LoadingSystem/LoadingSystem';
 export * from './components/Accordion/Accordion';
 export * from './components/Steps/Steps';
 export * from './components/SegmentedControl/SegmentedControl';
