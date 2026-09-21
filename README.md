@@ -33,6 +33,11 @@ Chat & Messaging:
 http://localhost:5173/chat.html
 ```
 
+Loading & Skeleton:
+```text
+http://localhost:5173/loading.html
+```
+
 ## Workspace
 - `packages/ui` — reusable UI library
 - `apps/demo` — interactive design-system/admin showcase
@@ -300,3 +305,68 @@ Do not hardcode page-specific light backgrounds, text colors, font families or b
 8. Ecommerce-specific logic stays in ecommerce patterns, not generic primitives.
 
 See `AGENTS.md` for coding-agent rules.
+
+
+---
+
+# Loading & Skeleton system
+
+Loading is part of the component contract, not a feature-specific decoration.
+
+## Which loading pattern to use
+
+| Situation | Use |
+|---|---|
+| User submits/saves/deletes | `<Button loading>` |
+| Small background refresh | `InlineLoader` |
+| One panel/section is fetching | `SectionLoader` |
+| Blocking operation over existing content | `LoadingOverlay` |
+| Initial page bootstrap, unknown layout | `PageLoader` |
+| Known page/card/list/table shape | Skeleton pattern |
+| API lifecycle | `LoadingState` |
+| Very fast requests that should not flash | `DelayedLoader` / `useDelayedLoading` |
+| Upload/import/export with real percentage | `Progress` |
+
+## Skeleton patterns
+
+Available public patterns:
+- `Skeleton`
+- `SkeletonText`
+- `SkeletonAvatar`
+- `SkeletonCard`
+- `SkeletonList`
+- `SkeletonTable`
+- `SkeletonForm`
+- `SkeletonProductCard`
+- `SkeletonPage`
+
+Prefer a skeleton when the final layout is predictable. It reduces layout shift and communicates what is coming better than a centered spinner.
+
+Do not use skeleton for submit actions or destructive operations. Those should keep the current UI visible and use button/overlay loading.
+
+## Loader variants
+
+- `Spinner` — default neutral async loading.
+- `DotsLoader` — conversational/search/typing-style background work.
+- `PulseLoader` — small live/background activity.
+- `InlineLoader` — loader + label inside surrounding content.
+- `SectionLoader` — isolated data region.
+- `PageLoader` — route/app bootstrap only.
+
+## Data lifecycle
+
+Use `LoadingState` when a feature has the standard lifecycle:
+
+```tsx
+<LoadingState
+  loading={query.isLoading}
+  error={query.error?.message}
+  empty={!query.data?.length}
+  onRetry={() => query.refetch()}
+>
+  <OrderTable data={query.data} />
+</LoadingState>
+```
+
+Use `DelayedLoader` for requests where showing a loader immediately would cause a distracting flash.
+
