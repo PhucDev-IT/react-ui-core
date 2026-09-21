@@ -29,7 +29,7 @@ export function DemoThemePersistence(){
   return null;
 }
 
-export function StandaloneThemeControl({page}:{page:'advanced'|'chat'}){
+export function StandaloneThemeControl({page}:{page:'advanced'|'chat'|'loading'}){
   const[mode,setMode]=useState<UiMode>(()=>readStoredMode());
 
   useEffect(()=>{
