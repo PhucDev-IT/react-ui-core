@@ -9,6 +9,7 @@ export default defineConfig({
         main: 'index.html',
         chat: 'chat.html',
         advanced: 'advanced.html',
+        loading: 'loading.html',
       },
     },
   },
