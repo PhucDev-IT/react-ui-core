@@ -82,3 +82,21 @@ pnpm build
 ```
 
 GitHub Actions also runs the build for `dev`/`main`. Do not claim completion if CI is failing.
+
+
+## Loading-state rules
+
+Do not invent feature-specific loaders when a core pattern exists.
+
+Selection:
+- submit/action -> `Button loading`
+- small refresh -> `InlineLoader`
+- section fetch -> `SectionLoader`
+- blocking mutation -> `LoadingOverlay`
+- predictable page/list/table/card fetch -> matching Skeleton component
+- unknown route/bootstrap -> `PageLoader`
+- loading/error/empty/success lifecycle -> `LoadingState`
+- fast request where loader could flash -> `DelayedLoader` or `useDelayedLoading`
+- measurable upload/import/export -> `Progress`
+
+Prefer skeletons over spinners for predictable data layouts. Do not replace visible content with a full-page loader during small background refreshes.
