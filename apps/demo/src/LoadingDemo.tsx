@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {
   Button,Card,Progress,LoadingOverlay,InlineLoader,DotsLoader,PulseLoader,SectionLoader,PageLoader,LoadingState,DelayedLoader,
   Skeleton,SkeletonText,SkeletonAvatar,SkeletonCard,SkeletonList,SkeletonTable,SkeletonForm,SkeletonProductCard,SkeletonPage
-} from '@my/ui';
+} from '@sarae/ui';
 import './loading-demo.scss';
 
 export default function LoadingDemo(){
