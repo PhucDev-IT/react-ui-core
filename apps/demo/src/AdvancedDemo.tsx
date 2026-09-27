@@ -7,7 +7,7 @@ import {
   Popover,ContextMenu,Sheet,BottomSheet,HoverCard,NotificationCenter,ChartFrame,Sparkline,KPITrend,ProgressRing,Gauge,MiniBarChart,FunnelChart,Heatmap,
   ProductVariantEditor,SKUMatrix,InventoryEditor,VoucherRuleBuilder,BannerUploader,ProductPicker,CategoryTreePicker,CustomerPicker,OrderStatusTimeline,PaymentStatus,FulfillmentStatus,
   ClipboardField,Kbd,CodeBlock,VirtualList,Collapse,Truncate,RelativeTime,Countdown,QRCodeViewer,BarcodeViewer,type VariantOption,type VariantRow,type Rule
-} from '@my/ui';
+} from '@sarae/ui';
 import './advanced-demo.scss';
 
 const svg=(a:string,b:string,text:string)=>`data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="640" height="480" fill="url(#g)"/><circle cx="320" cy="185" r="92" fill="white" opacity=".58"/><rect x="205" y="300" width="230" height="74" rx="32" fill="white" opacity=".72"/><text x="320" y="430" text-anchor="middle" font-family="Arial" font-size="28" fill="#334155">${text}</text></svg>`)}`;
