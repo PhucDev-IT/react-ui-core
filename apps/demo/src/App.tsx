@@ -3,7 +3,7 @@ import {
   Alert, AppShell, Avatar, Badge, Breadcrumb, Button, Card, Checkbox, Divider, Drawer, Dropdown, DropdownItem,
   EmptyState, Input, Modal, PageHeader, Pagination, Progress, Radio, Select, Skeleton, Spinner, StatCard, Switch,
   Table, Tabs, Textarea, ThemeProvider, Timeline, Tooltip, InputGroup, InputAddon, PasswordInput, NumberInput, SearchInput, FileUpload, SelectableCard, ToastProvider, useToast, ConfirmModal, LoadingOverlay, Accordion, Steps, SegmentedControl, DataTable, FilterBar, SettingsSection, ActivityFeed, DatePicker, DateRangePicker, RangeInput, TagsInput, RichTextEditor, ImageCheck, ImageCheckGrid, type UiDensity, type UiFontSize, type UiMode, type UiRadius, type UiContentWidth
-} from '@my/ui';
+} from '@sarae/ui';
 
 type NavKey = 'overview'|'foundation'|'buttons'|'forms'|'data'|'feedback'|'patterns';
 
