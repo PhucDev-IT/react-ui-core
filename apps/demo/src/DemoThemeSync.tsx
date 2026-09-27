@@ -1,5 +1,5 @@
 import {useEffect,useState} from 'react';
-import type {UiMode} from '@my/ui';
+import type {UiMode} from '@sarae/ui';
 import './standalone-demo.scss';
 
 const STORAGE_KEY='r-core-demo-mode';
