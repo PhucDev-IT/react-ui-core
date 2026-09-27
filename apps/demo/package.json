@@ -9,7 +9,7 @@
     "typecheck": "tsc -b --pretty false"
   },
   "dependencies": {
-    "@my/ui": "workspace:*",
+    "@sarae/ui": "workspace:*",
     "@vitejs/plugin-react": "latest",
     "vite": "latest",
     "typescript": "latest",
