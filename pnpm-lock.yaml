@@ -10,7 +10,7 @@ importers:
 
   apps/demo:
     dependencies:
-      '@my/ui':
+      '@sarae/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@vitejs/plugin-react':
