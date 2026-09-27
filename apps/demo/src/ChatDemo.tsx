@@ -1,5 +1,5 @@
 import {useMemo,useState} from 'react';
-import {Button,ChatConversationList,ChatLayout,ChatThread,ThemeProvider,type ChatConversation,type ChatMessage,type ChatUser} from '@my/ui';
+import {Button,ChatConversationList,ChatLayout,ChatThread,ThemeProvider,type ChatConversation,type ChatMessage,type ChatUser} from '@sarae/ui';
 
 const users:ChatUser[]=[
  {id:'me',name:'Phuc IT',presence:'online'},
