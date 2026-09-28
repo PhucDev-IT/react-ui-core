@@ -6,7 +6,7 @@ export function AppShell({sidebar,header,children,sidebarCollapsed,onSidebarColl
  const[mobileOpen,setMobileOpen]=useState(false);const[innerCollapsed,setInnerCollapsed]=useState(false);const collapsed=sidebarCollapsed??innerCollapsed;const setCollapsed=(v:boolean)=>{if(sidebarCollapsed===undefined)setInnerCollapsed(v);onSidebarCollapsedChange?.(v)};
  useEffect(()=>{if(!mobileOpen)return;const h=(e:KeyboardEvent)=>e.key==='Escape'&&setMobileOpen(false);addEventListener('keydown',h);return()=>removeEventListener('keydown',h)},[mobileOpen]);
  return <div className={cx('ui-shell',collapsed&&'is-collapsed',!stickyHeader&&'is-header-static')}>
-  <aside className="ui-shell__sidebar">{sidebar}{collapsible&&<button type="button" className="ui-shell__collapse-toggle" onClick={()=>setCollapsed(!collapsed)} aria-label={collapsed?'Expand sidebar':'Collapse sidebar'}>{collapsed?'›':'‹'}</button>}</aside>
+  <aside className="ui-shell__sidebar">{sidebar}{collapsible&&<button type="button" className="ui-shell__collapse-toggle" onClick={()=>setCollapsed(!collapsed)} aria-label={collapsed?'Expand sidebar':'Collapse sidebar'}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={collapsed?'m9 6 6 6-6 6':'m15 6-6 6 6 6'}/></svg></button>}</aside>
   <div className={`ui-shell__mobile-backdrop ${mobileOpen?'is-open':''}`} onClick={()=>setMobileOpen(false)}/>
   <aside className={`ui-shell__mobile-sidebar ${mobileOpen?'is-open':''}`}>{sidebar}</aside>
   <div className="ui-shell__main">
