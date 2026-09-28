@@ -6,7 +6,137 @@ export function ImageUploader({value=[],onChange,max=8,accept='image/*'}:{value?
 
 export function UploadList({items,onRetry,onRemove}:{items:MediaItem[];onRetry?:(id:string)=>void;onRemove?:(id:string)=>void}){return <div className="ui-upload-list">{items.map(x=><div key={x.id} className={`is-${x.status||'success'}`}><span className="ui-upload-list__icon">{x.status==='error'?'!':'↗'}</span><div><strong>{x.name}</strong><small>{x.size||''}</small>{x.status==='uploading'&&<span className="ui-upload-list__bar"><i style={{width:`${x.progress||0}%`}}/></span>}</div><div>{x.status==='error'&&<button type="button" onClick={()=>onRetry?.(x.id)}>Thử lại</button>}<button type="button" onClick={()=>onRemove?.(x.id)}>×</button></div></div>)}</div>}
 
-export function ImageCropper({src,aspect=1,onChange,width=600}:{src:string;aspect?:number;onChange?:(blob:Blob)=>void;width?:number}){const[zoom,setZoom]=useState(1);const[x,setX]=useState(0);const[y,setY]=useState(0);const canvas=useRef<HTMLCanvasElement>(null);const image=useRef<HTMLImageElement|null>(null);const draw=()=>{const c=canvas.current,img=image.current;if(!c||!img)return;const ctx=c.getContext('2d');if(!ctx)return;c.width=width;c.height=Math.round(width/aspect);ctx.clearRect(0,0,c.width,c.height);const scale=Math.max(c.width/img.width,c.height/img.height)*zoom;const w=img.width*scale,h=img.height*scale;ctx.drawImage(img,(c.width-w)/2+x,(c.height-h)/2+y,w,h)};useEffect(()=>{const img=new Image();img.crossOrigin='anonymous';img.onload=()=>{image.current=img;draw()};img.src=src},[src]);useEffect(draw,[zoom,x,y,aspect,width]);const exportCrop=()=>canvas.current?.toBlob(b=>b&&onChange?.(b),'image/jpeg',.92);return <div className="ui-cropper"><canvas ref={canvas}/><div className="ui-cropper__controls"><label>Zoom<input type="range" min="1" max="3" step="0.01" value={zoom} onChange={e=>setZoom(Number(e.target.value))}/></label><label>X<input type="range" min="-200" max="200" value={x} onChange={e=>setX(Number(e.target.value))}/></label><label>Y<input type="range" min="-200" max="200" value={y} onChange={e=>setY(Number(e.target.value))}/></label><button type="button" onClick={exportCrop}>Áp dụng crop</button></div></div>}
+export function ImageCropper({
+  src,
+  aspect=1,
+  onChange,
+  width=600,
+}:{
+  src:string;
+  aspect?:number;
+  onChange?:(blob:Blob)=>void;
+  width?:number;
+}){
+  const [zoom,setZoom]=useState(1);
+  const [offset,setOffset]=useState({x:0,y:0});
+  const viewport=useRef<HTMLDivElement>(null);
+  const canvas=useRef<HTMLCanvasElement>(null);
+  const image=useRef<HTMLImageElement|null>(null);
+  const drag=useRef<{x:number;y:number;originX:number;originY:number}|null>(null);
+
+  const cropRect=()=>{
+    const el=viewport.current;
+    if(!el)return null;
+    const vw=el.clientWidth;
+    const vh=el.clientHeight;
+    const maxW=vw*.78;
+    const maxH=vh*.78;
+    let h=maxH;
+    let w=h*aspect;
+    if(w>maxW){w=maxW;h=w/aspect}
+    return {left:(vw-w)/2,top:(vh-h)/2,width:w,height:h,vw,vh};
+  };
+
+  const emitCrop=()=>{
+    const img=image.current;
+    const rect=cropRect();
+    const el=viewport.current;
+    const out=canvas.current;
+    if(!img||!rect||!el||!out)return;
+
+    out.width=width;
+    out.height=Math.round(width/aspect);
+    const ctx=out.getContext('2d');
+    if(!ctx)return;
+
+    const baseScale=Math.max(rect.vw/img.naturalWidth,rect.vh/img.naturalHeight);
+    const scale=baseScale*zoom;
+    const renderedW=img.naturalWidth*scale;
+    const renderedH=img.naturalHeight*scale;
+    const imageLeft=(rect.vw-renderedW)/2+offset.x;
+    const imageTop=(rect.vh-renderedH)/2+offset.y;
+
+    const sx=(rect.left-imageLeft)/scale;
+    const sy=(rect.top-imageTop)/scale;
+    const sw=rect.width/scale;
+    const sh=rect.height/scale;
+
+    ctx.clearRect(0,0,out.width,out.height);
+    ctx.drawImage(img,sx,sy,sw,sh,0,0,out.width,out.height);
+    out.toBlob(blob=>blob&&onChange?.(blob),'image/jpeg',.92);
+  };
+
+  useEffect(()=>{
+    const img=new Image();
+    img.crossOrigin='anonymous';
+    img.onload=()=>{image.current=img;setOffset({x:0,y:0});setZoom(1)};
+    img.src=src;
+  },[src]);
+
+  useEffect(()=>{emitCrop()},[zoom,offset.x,offset.y,aspect,width]);
+
+  const onPointerDown=(e:React.PointerEvent<HTMLDivElement>)=>{
+    e.currentTarget.setPointerCapture(e.pointerId);
+    drag.current={x:e.clientX,y:e.clientY,originX:offset.x,originY:offset.y};
+  };
+  const onPointerMove=(e:React.PointerEvent<HTMLDivElement>)=>{
+    if(!drag.current)return;
+    setOffset({
+      x:drag.current.originX+(e.clientX-drag.current.x),
+      y:drag.current.originY+(e.clientY-drag.current.y),
+    });
+  };
+  const onPointerUp=(e:React.PointerEvent<HTMLDivElement>)=>{
+    drag.current=null;
+    e.currentTarget.releasePointerCapture?.(e.pointerId);
+    emitCrop();
+  };
+
+  return <div className="ui-cropper">
+    <div
+      ref={viewport}
+      className="ui-cropper__viewport"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={()=>{drag.current=null}}
+    >
+      <img
+        src={src}
+        alt=""
+        draggable={false}
+        style={{transform:`translate3d(${offset.x}px,${offset.y}px,0) scale(${zoom})`}}
+      />
+      <div className="ui-cropper__shade"/>
+      <div className="ui-cropper__frame" style={{aspectRatio:String(aspect)}}>
+        <span/><span/><span/><span/>
+        <div className="ui-cropper__grid ui-cropper__grid--v1"/>
+        <div className="ui-cropper__grid ui-cropper__grid--v2"/>
+        <div className="ui-cropper__grid ui-cropper__grid--h1"/>
+        <div className="ui-cropper__grid ui-cropper__grid--h2"/>
+      </div>
+    </div>
+
+    <div className="ui-cropper__toolbar">
+      <button type="button" className="ui-cropper__reset" onClick={()=>{setZoom(1);setOffset({x:0,y:0})}}>
+        Đặt lại
+      </button>
+      <label>
+        <span>Thu phóng</span>
+        <input
+          type="range"
+          min="1"
+          max="3"
+          step="0.01"
+          value={zoom}
+          onChange={e=>setZoom(Number(e.target.value))}
+        />
+      </label>
+    </div>
+
+    <canvas ref={canvas} className="ui-cropper__canvas" aria-hidden="true"/>
+  </div>
+}
 
 export function MediaManager({items,onSelect,selectedId}:{items:MediaItem[];onSelect?:(item:MediaItem)=>void;selectedId?:string}){const[q,setQ]=useState('');const filtered=useMemo(()=>items.filter(x=>x.name.toLowerCase().includes(q.toLowerCase())),[items,q]);return <div className="ui-media-manager"><div className="ui-media-manager__top"><input value={q} onChange={e=>setQ(e.target.value)} placeholder="Tìm file..."/><span>{filtered.length} files</span></div><div className="ui-media-manager__grid">{filtered.map(x=><button type="button" key={x.id} className={selectedId===x.id?'is-selected':''} onClick={()=>onSelect?.(x)}><img src={x.url} alt={x.name}/><span>{x.name}</span><small>{x.size}</small></button>)}</div></div>}
 
