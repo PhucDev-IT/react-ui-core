@@ -108,7 +108,7 @@ Use an Advanced component only when its richer behavior reduces custom feature c
 | Search a local list before selecting | `Combobox` |
 | Search an API / large remote list | `AsyncSelect` |
 | Choose multiple values | `MultiSelect` |
-| Choose hierarchical category | `Cascader` / `CategoryTreePicker` |
+| Choose hierarchical category | `Cascader` / `TreeView` |
 | Show a simple table | `Table` / `DataTable` |
 | Editable/sticky/resizable/server table | `AdvancedDataTable` |
 | One file input | `FileUpload` |
