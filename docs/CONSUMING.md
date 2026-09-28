@@ -106,4 +106,4 @@ Before publishing, switch package exports from source to built `dist` files, rem
 
 Whether consumed by submodule or package registry, feature applications must not copy components out of UI Core.
 
-If a reusable primitive/pattern is missing, add or improve it here first, then update the consuming application's pinned core version.
+If a reusable domain-neutral primitive is missing, add or improve it here first, then update the consuming application's pinned core version. Business/domain compositions remain in the consuming application.
