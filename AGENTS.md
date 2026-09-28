@@ -28,7 +28,7 @@ Examples:
 - multiple values -> `MultiSelect`
 - searchable local options -> `Combobox`
 - remote/API search -> `AsyncSelect`
-- hierarchical category -> `Cascader` / `CategoryTreePicker`
+- hierarchical category -> `Cascader` / `TreeView`
 - editable/resizable/server table -> `AdvancedDataTable`
 - image preview/reorder/crop workflow -> `ImageUploader` / Media components
 - report range -> range presets / `DualCalendarRange`
