@@ -370,3 +370,12 @@ Use `LoadingState` when a feature has the standard lifecycle:
 
 Use `DelayedLoader` for requests where showing a loader immediately would cause a distracting flash.
 
+
+
+---
+
+## Consumption
+
+Sarae applications currently consume this design system through a Git submodule pinned to an exact commit. This avoids copying components while keeping the core repository independently versioned.
+
+See `docs/CONSUMING.md` for the submodule workflow and the criteria for moving to a published `@sarae/ui` package later.
