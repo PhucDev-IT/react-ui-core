@@ -59,5 +59,4 @@ export * from './components/AdvancedDataTable/AdvancedDataTable';
 export * from './components/NavigationPlus/NavigationPlus';
 export * from './components/OverlayPlus/OverlayPlus';
 export * from './components/Visualization/Visualization';
-export * from './components/Ecommerce/Ecommerce';
 export * from './components/Utility/Utility';
