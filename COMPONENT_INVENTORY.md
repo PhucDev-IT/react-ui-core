@@ -30,7 +30,7 @@
 - ColorPicker
 - PinInput / OTP
 - Rating
-- CurrencyInput / PriceInput
+- CurrencyInput
 - PercentageInput
 - MaskedInput
 - Tiptap RichTextEditor
@@ -110,21 +110,8 @@
 - FunnelChart
 - Heatmap
 
-## Ecommerce patterns
-- ProductVariantEditor
-- SKUMatrix
-- PriceInput
-- InventoryEditor
-- DiscountConditionBuilder
-- VoucherRuleBuilder
-- BannerUploader
-- ProductPicker
-- CollectionPicker
-- CustomerPicker
-- CategoryTreePicker
-- OrderStatusTimeline
-- PaymentStatus
-- FulfillmentStatus
+## Application composition
+Business/domain components are intentionally not part of the Core package. Product, order, inventory, promotion, voucher and similar UIs are composed inside consuming applications from the primitives listed above.
 
 ## Utilities
 - CopyButton / ClipboardField
@@ -163,6 +150,6 @@
 
 ## Demo pages
 - `/` — core design-system overview
-- `/advanced.html` — advanced component & ecommerce showcase
+- `/advanced.html` — advanced generic component showcase
 - `/chat.html` — full chat/messaging showcase
 - `/loading.html` — loading, skeleton and async-state showcase
