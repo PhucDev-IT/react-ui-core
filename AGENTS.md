@@ -100,3 +100,13 @@ Selection:
 - measurable upload/import/export -> `Progress`
 
 Prefer skeletons over spinners for predictable data layouts. Do not replace visible content with a full-page loader during small background refreshes.
+
+
+## Consumption contract
+
+- `packages/ui` is the only public UI package and is named `@sarae/ui`.
+- Sarae feature repositories currently consume this repository through a Git submodule pinned to an exact commit.
+- Do not copy reusable components into consuming repositories.
+- Keep source exports compatible with the submodule workflow.
+- Keep `pnpm --filter @sarae/ui build` healthy so the same package can move to registry publishing later.
+- When making a breaking public API change, update `docs/CONSUMING.md` and call it out explicitly before consumers update their submodule pointer.
