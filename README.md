@@ -82,7 +82,7 @@ Do not replace a simple `Select` with `Combobox` or `AsyncSelect` unless users g
 
 ## 2. Advanced components
 
-Advanced components solve a more complex interaction or business workflow. They may compose multiple Basic components and contain richer state, filtering, hierarchy, keyboard behavior, drag/drop or domain-specific logic.
+Advanced components solve richer interaction problems while remaining domain-neutral. They may compose multiple Basic components and contain state, filtering, hierarchy, keyboard behavior or drag/drop, but they must not encode application business rules.
 
 Examples:
 - `MultiSelect`
@@ -94,10 +94,9 @@ Examples:
 - `AdvancedDataTable`
 - `TreeView`
 - `CommandPalette`
-- `ProductVariantEditor`
-- `VoucherRuleBuilder`
-- `ProductPicker`
-- `OrderStatusTimeline`
+- `ImageUploader`
+- `TreeView`
+- `AdvancedDataTable`
 
 Use an Advanced component only when its richer behavior reduces custom feature code.
 
@@ -189,23 +188,15 @@ For a small static table, use the Basic `Table` or `DataTable` instead.
 
 These are lightweight UI visualizations. Use a dedicated chart adapter/library when advanced charting, accessibility or large datasets require it.
 
-## Ecommerce patterns
-- `ProductVariantEditor`
-- `SKUMatrix`
-- `PriceInput`
-- `InventoryEditor`
-- `VoucherRuleBuilder`
-- `DiscountConditionBuilder`
-- `BannerUploader`
-- `CollectionPicker`
-- `ProductPicker`
-- `CategoryTreePicker`
-- `CustomerPicker`
-- `OrderStatusTimeline`
-- `PaymentStatus`
-- `FulfillmentStatus`
+## Application composition boundary
+Core does not export Product, Order, Inventory, Promotion, Voucher or other business-domain components.
 
-These are domain patterns, not primitives. Do not import ecommerce assumptions into generic Basic components.
+Feature applications and demo applications must compose domain UIs locally from generic Core primitives. Examples:
+- product variants -> local feature component built from Input, Select, Table and Badge;
+- order timeline -> local feature composition built from Timeline/Steps and Badge;
+- product/customer/category pickers -> local wrappers built from generic Select, Combobox, Cascader or TreeView.
+
+If a reusable interaction is missing, add a domain-neutral primitive to Core rather than moving the whole business component into Core.
 
 ## Utility / UX
 - `CopyButton`
@@ -227,39 +218,21 @@ These are domain patterns, not primitives. Do not import ecommerce assumptions i
 
 # Real admin composition examples
 
-## Product form
+## Composition examples
+
+### Feature form
 ```text
-Tên sản phẩm        -> Input
-SKU                  -> Input
-Danh mục             -> Cascader / CategoryTreePicker
-Thương hiệu          -> Combobox
+Tên                 -> Input
+Trạng thái           -> Select
+Danh mục phân cấp    -> Cascader / TreeView
 Tags                 -> MultiSelect / CreatableSelect
-Giá                  -> CurrencyInput
+Giá trị tiền tệ      -> CurrencyInput
 Mô tả                -> RichTextEditor
-Ảnh                  -> ImageUploader + crop + reorder
-Biến thể             -> ProductVariantEditor + SKUMatrix
+Ảnh                  -> ImageUploader
+Danh sách dữ liệu    -> Table / DataTable
 ```
 
-## Order list
-```text
-Keyword              -> SearchInput
-Status               -> MultiSelect
-Created date         -> Date range + presets
-Customer             -> AsyncSelect
-Rows                 -> AdvancedDataTable
-Row actions          -> ContextMenu
-Status details       -> OrderStatusTimeline
-```
-
-## Voucher form
-```text
-Voucher type         -> SegmentedControl
-Value                -> CurrencyInput / PercentageInput
-Conditions           -> DiscountConditionBuilder
-Products             -> ProductPicker
-Categories           -> CategoryTreePicker
-Schedule             -> DateTimePicker / range
-```
+The domain-specific layout, validation, naming and workflow belong to the consuming application.
 
 ---
 
@@ -295,14 +268,14 @@ Do not hardcode page-specific light backgrounds, text colors, font families or b
 
 # Design rules
 
-1. Feature pages should compose existing core components before creating new ones.
+1. Feature pages in consuming apps should compose existing Core primitives before creating local feature components.
 2. Prefer Basic components for ordinary form/UI needs.
 3. Use Advanced components only when the richer interaction is actually required.
 4. Do not duplicate a component just because one feature needs different spacing; extend tokens/variants first.
 5. No hardcoded colors/radius/typography in feature pages when a token already exists.
 6. All states are first-class: hover, focus, active, loading, disabled, empty, error and dark mode.
 7. Desktop, tablet and mobile must remain usable.
-8. Ecommerce-specific logic stays in ecommerce patterns, not generic primitives.
+8. Business/domain logic must stay in the consuming application, never in Core.
 
 See `AGENTS.md` for coding-agent rules.
 
