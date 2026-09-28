@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This repository is a reusable React + TypeScript admin design system. Coding agents must preserve the separation between generic Basic components, Advanced interaction components and ecommerce-specific patterns.
+This repository is a reusable React + TypeScript UI library. Coding agents must keep every exported component domain-neutral and reusable across unrelated applications.
 
 ## Before creating UI
 1. Read `README.md` and `COMPONENT_INVENTORY.md`.
@@ -35,10 +35,21 @@ Examples:
 
 Do not use an Advanced component merely because it looks more sophisticated.
 
-### Ecommerce patterns
-Components such as `ProductVariantEditor`, `SKUMatrix`, `VoucherRuleBuilder`, `ProductPicker`, `CategoryTreePicker`, `OrderStatusTimeline`, `PaymentStatus` and `FulfillmentStatus` are domain patterns.
+### Domain boundary
+Core must not contain application/business components such as Product, Order, Inventory, Promotion, Voucher, Customer or Sarae-specific workflows.
 
-Do not move ecommerce assumptions into generic Basic primitives.
+Allowed:
+- generic inputs, overlays, navigation, media, data-display and layout primitives;
+- advanced interactions that remain domain-neutral.
+
+Not allowed:
+- ProductVariantEditor / SKUMatrix with product rules;
+- voucher/promotion builders;
+- order/payment/fulfillment status components;
+- product/customer/category pickers named or shaped around one business domain;
+- feature validation or server/business assumptions.
+
+Large feature compositions belong in the consuming app or demo app and should be built locally from Core primitives.
 
 ## Theme rules
 Every new reusable component must work in light, dark and system mode.
@@ -67,12 +78,14 @@ Do not hardcode white page backgrounds, black text, arbitrary font families or o
 - Keep desktop/tablet/mobile responsive.
 
 ## Demo requirements
-When adding a component:
+When adding a Core component:
 1. Export it from `packages/ui/src/index.ts`.
 2. Include its SCSS in `packages/ui/src/theme/index.scss` when needed.
-3. Add a useful demo, not just a static placeholder.
-4. Update `COMPONENT_INVENTORY.md` when adding a new public component group.
-5. Ensure standalone demos (`advanced.html`, `chat.html`) inherit the same theme contract and typography as the main showcase.
+3. Demonstrate the primitive in a useful scenario.
+4. Update `COMPONENT_INVENTORY.md`.
+5. Keep standalone demos on the same theme contract.
+
+Demo applications may build large example screens, but those compositions must stay inside `apps/demo`; never move them into `packages/ui` merely for reuse by the demo.
 
 ## Build requirement
 Before considering work complete, the workspace must pass:
@@ -106,7 +119,7 @@ Prefer skeletons over spinners for predictable data layouts. Do not replace visi
 
 - `packages/ui` is the only public UI package and is named `@sarae/ui`.
 - Sarae feature repositories currently consume this repository through a Git submodule pinned to an exact commit.
-- Do not copy reusable components into consuming repositories.
+- Do not copy Core primitives into consuming repositories. Feature/domain compositions belong in consuming repositories.
 - Keep source exports compatible with the submodule workflow.
 - Keep `pnpm --filter @sarae/ui build` healthy so the same package can move to registry publishing later.
 - When making a breaking public API change, update `docs/CONSUMING.md` and call it out explicitly before consumers update their submodule pointer.
