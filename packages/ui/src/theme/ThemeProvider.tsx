@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useEffect, useMemo } from 'react';
+// Design tokens ship with the provider so the library build (dist/styles.css) defines every --ui-* variable.
+import './_tokens.scss';
 
 export type UiMode = 'light' | 'dark' | 'system';
 export type UiDensity = 'compact' | 'comfortable' | 'spacious';
